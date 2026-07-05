@@ -14,7 +14,7 @@ export function ProductTraceabilityTimeline() {
           <span>
             <span className="block font-bold text-ink-900">{step}</span>
             <span className="text-sm text-slate-600">
-              Day {Math.max(1, index * 7 + 1)} verified by producer log
+              생산자 기록으로 확인된 {Math.max(1, index * 7 + 1)}일차 단계
             </span>
           </span>
         </li>

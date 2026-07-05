@@ -47,7 +47,9 @@ export function useSpaces(initialFilters?: Partial<SpaceFilterState>) {
       setSpaces(result);
       setStatus('success');
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Failed to load spaces');
+      setError(
+        caught instanceof Error ? caught.message : '공간 목록을 불러오지 못했습니다',
+      );
       setStatus('error');
     }
   }, [params]);

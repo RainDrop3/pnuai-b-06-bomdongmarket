@@ -4,6 +4,7 @@ import { Badge } from '../../../components/common/Badge';
 import { Card } from '../../../components/common/Card';
 import type { SpaceDetail } from '../../../types/api';
 import { formatArea, formatCurrency } from '../../../utils/format';
+import { getSpaceStatusLabel } from '../../../utils/labels';
 
 interface SpaceInfoPanelProps {
   space: SpaceDetail;
@@ -21,7 +22,7 @@ export function SpaceInfoPanel({ space }: SpaceInfoPanelProps) {
     <Card className="p-5">
       <div className="flex flex-wrap items-center gap-2">
         <Badge tone={space.status === 'AVAILABLE' ? 'green' : 'slate'}>
-          {space.status}
+          {getSpaceStatusLabel(space.status)}
         </Badge>
         <Badge tone="yellow">{formatArea(space.area)}</Badge>
         <Badge tone="blue">{space.floor}F</Badge>
@@ -31,17 +32,17 @@ export function SpaceInfoPanel({ space }: SpaceInfoPanelProps) {
 
       <dl className="mt-5 grid gap-3 sm:grid-cols-3">
         <div className="rounded-app bg-leaf-50 p-3">
-          <dt className="text-xs font-semibold text-slate-500">Monthly rent</dt>
+          <dt className="text-xs font-semibold text-slate-500">월세</dt>
           <dd className="mt-1 font-black text-ink-900">
             {formatCurrency(space.monthlyRent)}
           </dd>
         </div>
         <div className="rounded-app bg-leaf-50 p-3">
-          <dt className="text-xs font-semibold text-slate-500">Location</dt>
+          <dt className="text-xs font-semibold text-slate-500">위치</dt>
           <dd className="mt-1 text-sm font-bold text-ink-900">{space.address}</dd>
         </div>
         <div className="rounded-app bg-leaf-50 p-3">
-          <dt className="text-xs font-semibold text-slate-500">Owner</dt>
+          <dt className="text-xs font-semibold text-slate-500">등록자</dt>
           <dd className="mt-1 flex items-center gap-1.5 text-sm font-bold text-ink-900">
             <UserRound className="h-4 w-4 text-leaf-700" aria-hidden />
             {space.owner.nickname}
@@ -52,14 +53,14 @@ export function SpaceInfoPanel({ space }: SpaceInfoPanelProps) {
       <div className="mt-5">
         <h2 className="flex items-center gap-2 text-sm font-bold text-ink-900">
           <Building2 className="h-4 w-4 text-leaf-700" aria-hidden />
-          Space conditions
+          공간 조건
         </h2>
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
           {(
             [
-              ['hasWater', 'Water'],
-              ['hasElectricity', 'Electricity'],
-              ['hasVentilation', 'Ventilation'],
+              ['hasWater', '수도'],
+              ['hasElectricity', '전기'],
+              ['hasVentilation', '환기'],
             ] as const
           ).map(([key, label]) => {
             const Icon = facilityIcons[key];
@@ -72,7 +73,7 @@ export function SpaceInfoPanel({ space }: SpaceInfoPanelProps) {
                 <Icon className="h-4 w-4 text-leaf-700" aria-hidden />
                 <span className="font-semibold text-ink-700">{label}</span>
                 <span className="ml-auto text-xs font-bold text-slate-500">
-                  {enabled ? 'Ready' : 'Needs setup'}
+                  {enabled ? '가능' : '보완 필요'}
                 </span>
               </div>
             );

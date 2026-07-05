@@ -21,7 +21,9 @@ export function useSpaceDetail(spaceId: number) {
       setSpace(result);
       setStatus('success');
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Failed to load space');
+      setError(
+        caught instanceof Error ? caught.message : '공간 정보를 불러오지 못했습니다',
+      );
       setStatus('error');
     }
   }, [spaceId]);

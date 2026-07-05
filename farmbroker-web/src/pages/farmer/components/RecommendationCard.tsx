@@ -28,7 +28,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
             <Badge tone="green">{recommendation.recommendedCrop}</Badge>
             <Badge tone="yellow">
               <Percent className="mr-1 h-3 w-3" aria-hidden />
-              {recommendation.matchingScore}% fit
+              적합도 {recommendation.matchingScore}%
             </Badge>
           </div>
           <h2 className="mt-3 text-xl font-black text-ink-900">{recommendation.title}</h2>
@@ -38,19 +38,21 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
           </p>
           <div className="mt-4 grid grid-cols-3 gap-2">
             <div className="rounded-app bg-leaf-50 p-2">
-              <span className="block text-xs font-semibold text-slate-500">Area</span>
+              <span className="block text-xs font-semibold text-slate-500">면적</span>
               <span className="font-bold text-ink-900">
                 {formatArea(recommendation.area)}
               </span>
             </div>
             <div className="rounded-app bg-leaf-50 p-2">
-              <span className="block text-xs font-semibold text-slate-500">Rent</span>
+              <span className="block text-xs font-semibold text-slate-500">월세</span>
               <span className="font-bold text-ink-900">
                 {formatCurrency(recommendation.monthlyRent)}
               </span>
             </div>
             <div className="rounded-app bg-leaf-50 p-2">
-              <span className="block text-xs font-semibold text-slate-500">Profit</span>
+              <span className="block text-xs font-semibold text-slate-500">
+                예상 수익
+              </span>
               <span className="font-bold text-ink-900">
                 {formatCurrency(recommendation.expectedProfit)}
               </span>
@@ -60,7 +62,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
             className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-app bg-leaf-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-leaf-800 sm:w-auto"
             to={ROUTES.spaceDetail(recommendation.spaceId)}
           >
-            View Details <ArrowRight className="h-4 w-4" aria-hidden />
+            자세히 보기 <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
       </div>

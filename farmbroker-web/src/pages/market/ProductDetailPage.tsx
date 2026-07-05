@@ -26,6 +26,7 @@ export function ProductDetailPage() {
     async function load() {
       setStatus('loading');
       try {
+        // URL의 productId가 없을 때도 데모가 끊기지 않도록 첫 상품을 기본값으로 사용합니다.
         const result = await getMarketItem(Number(productId ?? 1));
         setItem(result);
         setStatus('success');
@@ -44,13 +45,15 @@ export function ProductDetailPage() {
         to={ROUTES.market}
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
-        Back to market
+        마켓으로 돌아가기
       </Link>
 
       {status === 'loading' || status === 'idle' ? (
-        <LoadingState label="Loading product detail" />
+        <LoadingState label="상품 상세 정보를 불러오는 중입니다" />
       ) : null}
-      {status === 'error' ? <ErrorState message="Could not load product" /> : null}
+      {status === 'error' ? (
+        <ErrorState message="상품 정보를 불러오지 못했습니다" />
+      ) : null}
 
       {item ? (
         <div className="grid gap-5">
@@ -62,7 +65,7 @@ export function ProductDetailPage() {
           <Card className="p-5">
             <div className="flex flex-wrap gap-2">
               {item.freshnessTags.map((tag) => (
-                <Badge key={tag} tone={tag === 'Harvested Today' ? 'yellow' : 'green'}>
+                <Badge key={tag} tone={tag === '오늘 수확' ? 'yellow' : 'green'}>
                   {tag}
                 </Badge>
               ))}
@@ -72,7 +75,7 @@ export function ProductDetailPage() {
               {item.productionLocation} · {item.producerName}
             </p>
             <p className="mt-2 text-sm font-semibold text-slate-500">
-              Harvested {formatDate(item.harvestDate)}
+              수확일 {formatDate(item.harvestDate)}
             </p>
             <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <span className="text-2xl font-black text-ink-900">
@@ -84,7 +87,7 @@ export function ProductDetailPage() {
               </span>
               <div className="flex items-center gap-2">
                 <Button
-                  aria-label="Decrease quantity"
+                  aria-label="수량 줄이기"
                   disabled={quantity === 1}
                   onClick={() => setQuantity((value) => Math.max(1, value - 1))}
                   size="sm"
@@ -96,7 +99,7 @@ export function ProductDetailPage() {
                   {quantity}
                 </span>
                 <Button
-                  aria-label="Increase quantity"
+                  aria-label="수량 늘리기"
                   onClick={() => setQuantity((value) => Math.min(item.stock, value + 1))}
                   size="sm"
                   variant="outline"
@@ -107,23 +110,23 @@ export function ProductDetailPage() {
             </div>
             <Button className="mt-5 w-full">
               <ShoppingBag className="h-5 w-5" aria-hidden />
-              Purchase {formatCurrency(item.price * quantity)}
+              {formatCurrency(item.price * quantity)} 구매하기
             </Button>
           </Card>
 
           <Card className="p-5">
             <h2 className="flex items-center gap-2 text-xl font-black text-ink-900">
               <Route className="h-5 w-5 text-leaf-700" aria-hidden />
-              Food mileage reduction
+              푸드 마일리지 절감
             </h2>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              This item traveled {item.foodMileageKm} km from farm to pickup point,
-              reducing long-haul transport compared with conventional distribution.
+              이 상품은 농장에서 픽업 지점까지 {item.foodMileageKm}km만 이동했습니다. 일반
+              유통 대비 장거리 운송 부담을 줄입니다.
             </p>
           </Card>
 
           <Card className="p-5">
-            <h2 className="text-xl font-black text-ink-900">Production history</h2>
+            <h2 className="text-xl font-black text-ink-900">생산 이력</h2>
             <div className="mt-4">
               <ProductTraceabilityTimeline />
             </div>

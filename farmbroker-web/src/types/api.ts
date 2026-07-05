@@ -155,7 +155,7 @@ export interface ContractSummary {
   contractId: number;
   spaceName: string;
   counterparty: string;
-  status: 'Request' | 'Negotiation' | 'Review' | 'Complete';
+  status: '신청' | '협의' | '검토' | '완료';
   monthlyRent: number;
   period: string;
 }

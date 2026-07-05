@@ -13,14 +13,14 @@ export function HeroSection() {
     >
       <img
         src={heroContent.imageUrl}
-        alt="Indoor smart farm with leafy greens"
+        alt="잎채소를 재배하는 실내 스마트팜"
         className="absolute inset-0 h-full w-full object-cover opacity-55"
       />
       <div className="via-ink-900/82 to-leaf-900/42 absolute inset-0 bg-gradient-to-r from-ink-900" />
       <div className="relative mx-auto grid min-h-[620px] max-w-7xl content-end gap-8 px-4 pb-12 pt-24 sm:px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.65fr)] lg:items-end lg:pb-16">
         <div className="max-w-3xl">
           <p className="bg-white/14 mb-4 inline-flex rounded-full px-3 py-1 text-sm font-semibold text-leaf-50 ring-1 ring-white/15">
-            Bomdong Market
+            봄동마켓
           </p>
           <h1
             id="home-hero-title"

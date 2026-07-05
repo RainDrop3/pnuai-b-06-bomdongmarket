@@ -13,18 +13,18 @@ export function ServiceOverviewSection() {
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-soil-500">
-              Choose your role
+              역할 선택
             </p>
             <h2
               id="role-selection-title"
               className="mt-2 text-2xl font-black text-ink-900 sm:text-3xl"
             >
-              Your app experience starts from a clear role.
+              선택한 역할에 맞춰 필요한 흐름만 빠르게 보여줍니다.
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-6 text-slate-600">
-            Space owners, urban farmers, and local consumers all share one marketplace,
-            but each flow stays focused on the next practical action.
+            공간 제공자, 도심 농부, 로컬 소비자가 같은 플랫폼을 사용하지만 각 역할의 다음
+            행동은 명확하게 분리됩니다.
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export function ServiceOverviewSection() {
                   {role.description}
                 </p>
                 <span className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-leaf-700">
-                  Continue <ArrowRight className="h-4 w-4" aria-hidden />
+                  계속하기 <ArrowRight className="h-4 w-4" aria-hidden />
                 </span>
               </Card>
             </Link>
@@ -48,7 +48,7 @@ export function ServiceOverviewSection() {
 
       <section className="mt-10" aria-labelledby="quick-actions-title">
         <h2 id="quick-actions-title" className="text-2xl font-black text-ink-900">
-          Quick actions for the demo
+          데모 빠른 실행
         </h2>
         <div className="mt-5 grid gap-4 lg:grid-cols-3">
           {quickActions.map((action) => (

@@ -15,18 +15,23 @@ interface SpaceListProps {
 // 공간 목록의 로딩, 에러, 빈 상태까지 한곳에서 처리합니다.
 export function SpaceList({ spaces, status, error, onRetry }: SpaceListProps) {
   if (status === 'loading' || status === 'idle') {
-    return <LoadingState label="Loading available spaces" />;
+    return <LoadingState label="등록된 공간을 불러오는 중입니다" />;
   }
 
   if (status === 'error') {
-    return <ErrorState message={error ?? 'Could not load spaces'} onRetry={onRetry} />;
+    return (
+      <ErrorState
+        message={error ?? '공간 목록을 불러오지 못했습니다'}
+        onRetry={onRetry}
+      />
+    );
   }
 
   if (spaces.length === 0) {
     return (
       <EmptyState
-        title="No spaces found"
-        description="Try a different keyword, lower rent cap, or remove the area filter."
+        title="검색된 공간이 없습니다"
+        description="다른 키워드를 입력하거나 월세/면적 필터를 조정해보세요."
       />
     );
   }

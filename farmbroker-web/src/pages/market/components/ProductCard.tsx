@@ -22,7 +22,7 @@ export function ProductCard({ item }: ProductCardProps) {
       <div className="p-4">
         <div className="flex flex-wrap gap-1.5">
           {item.freshnessTags.slice(0, 2).map((tag) => (
-            <Badge key={tag} tone={tag === 'Harvested Today' ? 'yellow' : 'green'}>
+            <Badge key={tag} tone={tag === '오늘 수확' ? 'yellow' : 'green'}>
               {tag}
             </Badge>
           ))}
@@ -33,16 +33,16 @@ export function ProductCard({ item }: ProductCardProps) {
         <p className="mt-1 text-sm text-slate-600">{item.productionLocation}</p>
         <p className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-slate-500">
           <Route className="h-3.5 w-3.5 text-leaf-700" aria-hidden />
-          {item.foodMileageKm} km food mileage · Harvest {formatDate(item.harvestDate)}
+          푸드 마일리지 {item.foodMileageKm}km · 수확일 {formatDate(item.harvestDate)}
         </p>
         <div className="mt-4 flex items-center justify-between gap-3">
           <span className="text-lg font-black text-ink-900">
             {formatCurrency(item.price)}
             <span className="text-xs font-semibold text-slate-500"> / {item.unit}</span>
           </span>
-          <Button aria-label={`Add ${item.name}`} size="sm">
+          <Button aria-label={`${item.name} 담기`} size="sm">
             <Plus className="h-4 w-4" aria-hidden />
-            Add
+            담기
           </Button>
         </div>
       </div>

@@ -15,17 +15,17 @@ export function MyPage() {
             <UserRound className="h-8 w-8" aria-hidden />
           </span>
           <div>
-            <h1 className="text-2xl font-black text-ink-900">Green Space Lab</h1>
+            <h1 className="text-2xl font-black text-ink-900">그린스페이스랩</h1>
             <div className="mt-2">
-              <Badge tone="green">Space Owner</Badge>
+              <Badge tone="green">공간 제공자</Badge>
             </div>
           </div>
         </div>
         <div className="mt-5 grid grid-cols-3 gap-2">
           {[
-            ['Spaces', '4'],
-            ['Purchases', '8'],
-            ['Settlement', '₩1.2M'],
+            ['공간', '4'],
+            ['구매', '8'],
+            ['정산', '120만원'],
           ].map(([label, value]) => (
             <div key={label} className="rounded-app bg-leaf-50 p-3 text-center">
               <p className="text-lg font-black text-ink-900">{value}</p>

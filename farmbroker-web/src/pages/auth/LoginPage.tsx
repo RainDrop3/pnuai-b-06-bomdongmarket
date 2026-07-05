@@ -30,10 +30,10 @@ export function LoginPage() {
       <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-soil-500">
-            Choose your role
+            역할 선택
           </p>
           <h1 className="mt-2 text-3xl font-black text-ink-900">
-            Your app experience will be customized based on your role.
+            선택한 역할에 따라 봄동마켓 사용 흐름이 달라집니다.
           </h1>
           <div className="mt-6">
             <RoleSelectionCards onChange={setRole} value={role} />
@@ -41,39 +41,39 @@ export function LoginPage() {
         </div>
 
         <Card className="p-5">
-          <h2 className="text-2xl font-black text-ink-900">Login</h2>
+          <h2 className="text-2xl font-black text-ink-900">로그인</h2>
           <p className="mt-2 text-sm text-slate-600">
-            Use the demo credentials or continue with a social login placeholder.
+            데모 계정으로 로그인하거나 소셜 로그인 흐름을 확인할 수 있습니다.
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            <Button variant="outline">Continue with Google</Button>
-            <Button variant="outline">Continue with Kakao</Button>
+            <Button variant="outline">Google로 계속하기</Button>
+            <Button variant="outline">카카오로 계속하기</Button>
           </div>
           <form className="mt-5 grid gap-4" onSubmit={handleSubmit}>
             <Input
               defaultValue="owner@example.com"
               icon={<Mail className="h-4 w-4" aria-hidden />}
-              label="Email"
+              label="이메일"
               name="email"
               type="email"
             />
             <Input
               defaultValue="12345678"
               icon={<Lock className="h-4 w-4" aria-hidden />}
-              label="Password"
+              label="비밀번호"
               minLength={8}
               name="password"
               type="password"
             />
             <Button disabled={isSubmitting} type="submit">
-              {isSubmitting ? 'Logging in...' : 'Login'}
+              {isSubmitting ? '로그인 중...' : '로그인'}
               <ArrowRight className="h-5 w-5" aria-hidden />
             </Button>
           </form>
           <p className="mt-5 text-center text-sm text-slate-600">
-            New to Bomdong Market?{' '}
+            봄동마켓이 처음이신가요?{' '}
             <button className="font-bold text-leaf-700" type="button">
-              Sign up
+              회원가입
             </button>
           </p>
         </Card>

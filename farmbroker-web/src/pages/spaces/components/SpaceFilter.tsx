@@ -14,33 +14,33 @@ export function SpaceFilter({ filters, onChange }: SpaceFilterProps) {
   return (
     <form className="grid gap-3 rounded-app border border-leaf-100 bg-white p-4 shadow-card md:grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr]">
       <Input
-        aria-label="Search spaces"
+        aria-label="공간 검색"
         icon={<Search className="h-4 w-4" aria-hidden />}
         name="keyword"
-        placeholder="Search title or location"
+        placeholder="공간명 또는 지역 검색"
         value={filters.keyword}
         onChange={(event) => onChange({ ...filters, keyword: event.target.value })}
       />
       <Input
-        aria-label="Minimum area"
+        aria-label="최소 면적"
         name="minArea"
         min={0}
-        placeholder="Min area"
+        placeholder="최소 면적"
         type="number"
         value={filters.minArea}
         onChange={(event) => onChange({ ...filters, minArea: event.target.value })}
       />
       <Input
-        aria-label="Maximum rent"
+        aria-label="최대 월세"
         name="maxRent"
         min={0}
-        placeholder="Max rent"
+        placeholder="최대 월세"
         type="number"
         value={filters.maxRent}
         onChange={(event) => onChange({ ...filters, maxRent: event.target.value })}
       />
       <label className="relative block">
-        <span className="sr-only">Sort spaces</span>
+        <span className="sr-only">공간 정렬</span>
         <SlidersHorizontal
           className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
           aria-hidden

@@ -14,14 +14,14 @@ export function ProfitPredictionPage() {
         to={ROUTES.newSpace}
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
-        Back to registration
+        등록 화면으로 돌아가기
       </Link>
       <div className="mb-6">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-soil-500">
-          Profit Prediction
+          수익 예측
         </p>
         <h1 className="mt-2 text-3xl font-black text-ink-900">
-          Expected return from the selected space
+          선택한 공간의 예상 수익을 확인하세요
         </h1>
       </div>
       <PredictionResultCard />

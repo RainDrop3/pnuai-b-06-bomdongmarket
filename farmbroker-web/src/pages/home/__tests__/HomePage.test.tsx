@@ -6,15 +6,15 @@ import { HomePage } from '../HomePage';
 import { roleCards } from '../constants/homeContent';
 
 describe('HomePage', () => {
-  it('renders onboarding copy and role constants', () => {
+  it('온보딩 문구와 역할 상수를 렌더링한다', () => {
     renderWithProviders(<HomePage />);
 
     expect(
       screen.getByRole('heading', {
-        name: /turn unused spaces into urban smart farms/i,
+        name: /비어 있는 공간을 도심 스마트팜으로 바꾸세요/i,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /get started/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /시작하기/i })).toBeInTheDocument();
 
     roleCards.forEach((role) => {
       expect(screen.getByText(role.label)).toBeInTheDocument();

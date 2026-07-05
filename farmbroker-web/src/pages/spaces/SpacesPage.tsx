@@ -17,14 +17,14 @@ export function SpacesPage() {
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-soil-500">
-            Spaces
+            공간
           </p>
           <h1 className="mt-2 text-3xl font-black text-ink-900 sm:text-4xl">
-            Find smart-farm-ready urban spaces
+            스마트팜으로 전환 가능한 도심 공간 찾기
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
-            Search by location, compare monthly rent, and open a detail page to run AI
-            crop recommendations or send matching requests.
+            지역명으로 검색하고 월세를 비교한 뒤 상세 화면에서 AI 작물 추천과 매칭
+            신청까지 이어갈 수 있습니다.
           </p>
         </div>
         <Link
@@ -32,7 +32,7 @@ export function SpacesPage() {
           to={ROUTES.newSpace}
         >
           <Plus className="h-5 w-5" aria-hidden />
-          Register Space
+          공간 등록
         </Link>
       </div>
 

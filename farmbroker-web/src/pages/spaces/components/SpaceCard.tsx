@@ -6,6 +6,7 @@ import { Card } from '../../../components/common/Card';
 import { ROUTES } from '../../../constants/routes';
 import type { SpaceSummary } from '../../../types/api';
 import { formatArea, formatCurrency } from '../../../utils/format';
+import { getSpaceStatusLabel } from '../../../utils/labels';
 
 interface SpaceCardProps {
   space: SpaceSummary;
@@ -29,7 +30,7 @@ export function SpaceCard({ space, compact = false }: SpaceCardProps) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <Badge tone={space.status === 'AVAILABLE' ? 'green' : 'slate'}>
-              {space.status}
+              {getSpaceStatusLabel(space.status)}
             </Badge>
             <h3 className="mt-3 line-clamp-2 text-lg font-bold text-ink-900">
               {space.title}
@@ -45,18 +46,13 @@ export function SpaceCard({ space, compact = false }: SpaceCardProps) {
         </p>
         <div className="mt-4 flex items-center justify-between gap-3">
           <span>
-            <span className="block text-xs font-semibold text-slate-500">
-              Monthly rent
-            </span>
+            <span className="block text-xs font-semibold text-slate-500">월세</span>
             <span className="font-black text-ink-900">
               {formatCurrency(space.monthlyRent)}
             </span>
           </span>
           {!compact ? (
-            <div
-              className="flex items-center gap-1 text-leaf-700"
-              aria-label="Core utilities"
-            >
+            <div className="flex items-center gap-1 text-leaf-700" aria-label="주요 시설">
               <Droplets className="h-4 w-4" aria-hidden />
               <Plug className="h-4 w-4" aria-hidden />
               <Wind className="h-4 w-4" aria-hidden />
@@ -67,7 +63,7 @@ export function SpaceCard({ space, compact = false }: SpaceCardProps) {
           className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-app bg-leaf-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-leaf-800"
           to={ROUTES.spaceDetail(space.spaceId)}
         >
-          View Details <ArrowRight className="h-4 w-4" aria-hidden />
+          자세히 보기 <ArrowRight className="h-4 w-4" aria-hidden />
         </Link>
       </div>
     </Card>

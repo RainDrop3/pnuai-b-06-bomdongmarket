@@ -13,6 +13,7 @@ import { SpaceCreatePage, SpacesPage } from '../pages/spaces';
 export function AppRouter() {
   return (
     <Routes>
+      {/* AppLayout 아래의 모든 화면은 공통 헤더와 모바일 하단 탭을 공유합니다. */}
       <Route element={<AppLayout />}>
         <Route element={<HomePage />} path={ROUTES.home} />
         <Route element={<LoginPage />} path={ROUTES.login} />

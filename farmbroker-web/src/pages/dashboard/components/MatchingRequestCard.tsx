@@ -5,6 +5,7 @@ import { Button } from '../../../components/common/Button';
 import { Card } from '../../../components/common/Card';
 import type { MatchingRequest } from '../../../types/api';
 import { formatCurrency, formatDate } from '../../../utils/format';
+import { getMatchingStatusLabel } from '../../../utils/labels';
 
 interface MatchingRequestCardProps {
   request: MatchingRequest;
@@ -25,7 +26,7 @@ export function MatchingRequestCard({ request }: MatchingRequestCardProps) {
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <Badge tone={request.status === 'REQUESTED' ? 'yellow' : 'green'}>
-              {request.status}
+              {getMatchingStatusLabel(request.status)}
             </Badge>
             <span className="text-xs font-semibold text-slate-500">
               {formatDate(request.createdAt)}
@@ -41,11 +42,11 @@ export function MatchingRequestCard({ request }: MatchingRequestCardProps) {
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
         <Button size="sm">
           <Check className="h-4 w-4" aria-hidden />
-          Accept
+          수락
         </Button>
         <Button size="sm" variant="outline">
           <X className="h-4 w-4" aria-hidden />
-          Reject
+          거절
         </Button>
       </div>
     </Card>

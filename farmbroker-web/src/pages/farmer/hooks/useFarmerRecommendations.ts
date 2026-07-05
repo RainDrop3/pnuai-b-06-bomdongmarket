@@ -22,7 +22,7 @@ export function useFarmerRecommendations() {
       setStatus('success');
     } catch (caught) {
       setError(
-        caught instanceof Error ? caught.message : 'Failed to load recommendations',
+        caught instanceof Error ? caught.message : '추천 공간을 불러오지 못했습니다',
       );
       setStatus('error');
     }

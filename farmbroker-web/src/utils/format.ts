@@ -19,7 +19,7 @@ export function formatArea(value: number) {
 }
 
 export function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en', {
+  return new Intl.DateTimeFormat('ko-KR', {
     month: 'short',
     day: 'numeric',
   }).format(new Date(value));

@@ -6,18 +6,18 @@ import { renderWithProviders } from '../../../test/renderWithProviders';
 import { SpaceDetailPage } from '../SpaceDetailPage';
 
 describe('SpaceDetailPage', () => {
-  it('loads detail data and runs AI recommendation', async () => {
+  it('상세 데이터를 불러오고 AI 추천을 실행한다', async () => {
     const user = userEvent.setup();
     renderWithProviders(<SpaceDetailPage />, { route: '/spaces/1' });
 
     expect(
       await screen.findByRole('heading', {
-        name: /jangjeon-dong 20 pyeong retail space/i,
+        name: /부산대 앞 20평 상가 공실/i,
       }),
     ).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: /run ai recommendation/i }));
-    expect(await screen.findByText(/layout suggestion/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/butterhead lettuce/i).length).toBeGreaterThan(0);
+    await user.click(screen.getByRole('button', { name: /AI 추천 실행/i }));
+    expect(await screen.findByText(/배치 제안/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/버터헤드 상추/i).length).toBeGreaterThan(0);
   });
 });

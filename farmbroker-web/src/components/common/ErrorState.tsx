@@ -10,7 +10,7 @@ interface ErrorStateProps {
 
 // API 연결 실패나 mock 처리 예외를 화면 안에서 복구 가능한 상태로 표시합니다.
 export function ErrorState({
-  title = 'Something went wrong',
+  title = '문제가 발생했습니다',
   message,
   onRetry,
 }: ErrorStateProps) {
@@ -21,7 +21,7 @@ export function ErrorState({
       <p className="mt-2 text-sm">{message}</p>
       {onRetry ? (
         <Button className="mt-5" onClick={onRetry} variant="danger">
-          Try again
+          다시 시도
         </Button>
       ) : null}
     </div>

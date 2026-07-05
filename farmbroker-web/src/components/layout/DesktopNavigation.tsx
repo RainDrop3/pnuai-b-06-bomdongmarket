@@ -6,7 +6,7 @@ import { cn } from '../../utils/cn';
 // 넓은 화면에서는 상단 네비게이션을 사용해 주요 데모 흐름을 빠르게 이동합니다.
 export function DesktopNavigation() {
   return (
-    <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+    <nav className="hidden items-center gap-1 lg:flex" aria-label="주요 내비게이션">
       {PRIMARY_NAVIGATION.map((item) => (
         <NavLink
           key={item.href}

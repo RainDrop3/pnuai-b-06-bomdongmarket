@@ -6,14 +6,14 @@ import { renderWithProviders } from '../../../test/renderWithProviders';
 import { LoginPage } from '../LoginPage';
 
 describe('LoginPage', () => {
-  it('renders role cards and login form', async () => {
+  it('역할 카드와 로그인 폼을 렌더링한다', async () => {
     const user = userEvent.setup();
     renderWithProviders(<LoginPage />);
 
-    expect(screen.getByText('Space Owner')).toBeInTheDocument();
-    expect(screen.getByLabelText(/email/i)).toHaveValue('owner@example.com');
+    expect(screen.getByText('공간 제공자')).toBeInTheDocument();
+    expect(screen.getByLabelText(/이메일/i)).toHaveValue('owner@example.com');
 
-    await user.click(screen.getByText('Urban Farmer'));
-    expect(screen.getByText('Urban Farmer')).toBeInTheDocument();
+    await user.click(screen.getByText('도심 농부'));
+    expect(screen.getByText('도심 농부')).toBeInTheDocument();
   });
 });

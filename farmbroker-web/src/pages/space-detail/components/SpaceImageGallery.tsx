@@ -21,7 +21,7 @@ export function SpaceImageGallery({ title, imageUrls }: SpaceImageGalleryProps) 
           {imageUrls.map((imageUrl) => (
             <button
               key={imageUrl}
-              aria-label={`Show image ${imageUrls.indexOf(imageUrl) + 1}`}
+              aria-label={`이미지 ${imageUrls.indexOf(imageUrl) + 1} 보기`}
               className="overflow-hidden rounded-app border border-leaf-100 focus-visible:outline-leaf-500"
               onClick={() => setSelectedImage(imageUrl)}
               type="button"

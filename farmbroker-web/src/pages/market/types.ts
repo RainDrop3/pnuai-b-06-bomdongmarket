@@ -1,1 +1,1 @@
-export type MarketCategory = 'All' | 'Leafy Greens' | 'Herbs' | 'Fruit Vegetables';
+export type MarketCategory = '전체' | '잎채소' | '허브' | '과채류';

@@ -22,6 +22,7 @@ export function SpaceCreatePage() {
     setIsSaving(true);
 
     // 데모에서는 FormData를 API 요청 DTO와 같은 모양으로 정리한 뒤 mock 서비스에 전달합니다.
+    // 이 변환부만 실제 업로드/주소검색 API와 연결하면 화면 컴포넌트는 그대로 유지할 수 있습니다.
     await createSpace({
       title: String(formData.get('title')),
       address: String(formData.get('address')),
@@ -43,9 +44,9 @@ export function SpaceCreatePage() {
     <PageContainer narrow>
       <div className="mb-6">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-soil-500">
-          Register Space
+          공간 등록
         </p>
-        <h1 className="mt-2 text-3xl font-black text-ink-900">Add a new grow space</h1>
+        <h1 className="mt-2 text-3xl font-black text-ink-900">새 재배 공간 등록</h1>
       </div>
 
       <div className="mb-6 grid grid-cols-4 gap-2">
@@ -65,29 +66,29 @@ export function SpaceCreatePage() {
       <form className="grid gap-5" onSubmit={handleSubmit}>
         <Card className="grid gap-4 p-5">
           <Input
-            defaultValue="Jangjeon-dong 20 pyeong retail space"
-            label="Space Name"
+            defaultValue="부산대 앞 20평 상가 공실"
+            label="공간 이름"
             name="title"
             required
           />
           <Input
-            defaultValue="Busan Geumjeong-gu Jangjeon-dong"
-            label="Space Location"
+            defaultValue="부산광역시 금정구 장전동"
+            label="공간 위치"
             name="address"
             required
           />
           <div className="grid gap-4 sm:grid-cols-3">
             <Input
               defaultValue="66"
-              label="Total Area"
+              label="전체 면적"
               min={1}
               name="area"
               type="number"
             />
-            <Input defaultValue="2" label="Floor" name="floor" type="number" />
+            <Input defaultValue="2" label="층수" name="floor" type="number" />
             <Input
               defaultValue="500000"
-              label="Desired Rent"
+              label="희망 월세"
               min={0}
               name="monthlyRent"
               type="number"
@@ -96,12 +97,12 @@ export function SpaceCreatePage() {
         </Card>
 
         <Card className="p-5">
-          <h2 className="text-lg font-bold text-ink-900">Space conditions</h2>
+          <h2 className="text-lg font-bold text-ink-900">공간 조건</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             {[
-              ['hasWater', 'Water Access'],
-              ['hasElectricity', 'Electricity Access'],
-              ['hasVentilation', 'Ventilation'],
+              ['hasWater', '수도 사용 가능'],
+              ['hasElectricity', '전기 사용 가능'],
+              ['hasVentilation', '환기 가능'],
             ].map(([name, label]) => (
               <label
                 key={name}
@@ -118,10 +119,10 @@ export function SpaceCreatePage() {
             ))}
           </div>
           <label className="mt-4 block text-sm font-medium text-ink-700">
-            Notes
+            상세 메모
             <textarea
               className="mt-2 min-h-28 w-full rounded-app border border-leaf-100 bg-white px-3 py-3 text-sm text-ink-900 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200"
-              defaultValue="Bright retail space with water access and room for multi-tier cultivation racks."
+              defaultValue="채광이 좋고 수도 사용이 가능하며 다단 재배 선반을 배치할 수 있는 상가 공간입니다."
               name="description"
             />
           </label>
@@ -130,9 +131,9 @@ export function SpaceCreatePage() {
         <Card className="p-5">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <h2 className="text-lg font-bold text-ink-900">Photo Upload</h2>
+              <h2 className="text-lg font-bold text-ink-900">사진 업로드</h2>
               <p className="mt-1 text-sm text-slate-600">
-                Add images in the same order they should appear on cards.
+                카드에 노출될 순서대로 이미지를 등록합니다.
               </p>
             </div>
             <Camera className="h-8 w-8 text-leaf-700" aria-hidden />
@@ -142,26 +143,26 @@ export function SpaceCreatePage() {
             type="button"
           >
             <Upload className="mb-2 h-6 w-6" aria-hidden />
-            Upload photos
+            사진 업로드
           </button>
         </Card>
 
         {saved ? (
           <div className="rounded-app border border-leaf-200 bg-leaf-50 p-4 text-leaf-900">
-            <CheckCircle2 className="inline h-5 w-5 align-[-4px]" aria-hidden /> Space
-            saved to mock data. Continue to prediction for the demo flow.
+            <CheckCircle2 className="inline h-5 w-5 align-[-4px]" aria-hidden /> 공간이
+            데모 데이터에 저장되었습니다. 수익 예측 화면으로 이어서 확인해보세요.
           </div>
         ) : null}
 
         <div className="sticky bottom-20 z-10 rounded-app border border-leaf-100 bg-white p-3 shadow-lift lg:static lg:p-0 lg:shadow-none">
           {saved ? (
             <Button className="w-full" onClick={() => navigate(ROUTES.prediction)}>
-              Continue to Profit Prediction
+              수익 예측으로 이동
               <ArrowRight className="h-5 w-5" aria-hidden />
             </Button>
           ) : (
             <Button className="w-full" disabled={isSaving} type="submit">
-              {isSaving ? 'Saving...' : 'Next'}
+              {isSaving ? '저장 중...' : '다음'}
               <ArrowRight className="h-5 w-5" aria-hidden />
             </Button>
           )}

@@ -16,7 +16,7 @@ export function ContractCard({ contract }: ContractCardProps) {
     <Card className="p-4">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <Badge tone={contract.status === 'Complete' ? 'green' : 'yellow'}>
+          <Badge tone={contract.status === '완료' ? 'green' : 'yellow'}>
             {contract.status}
           </Badge>
           <h3 className="mt-3 text-lg font-black text-ink-900">{contract.spaceName}</h3>
@@ -26,18 +26,18 @@ export function ContractCard({ contract }: ContractCardProps) {
       </div>
       <dl className="mt-4 grid gap-3 sm:grid-cols-2">
         <div>
-          <dt className="text-xs font-semibold text-slate-500">Monthly Rent</dt>
+          <dt className="text-xs font-semibold text-slate-500">월세</dt>
           <dd className="font-bold text-ink-900">
             {formatCurrency(contract.monthlyRent)}
           </dd>
         </div>
         <div>
-          <dt className="text-xs font-semibold text-slate-500">Contract Period</dt>
+          <dt className="text-xs font-semibold text-slate-500">계약 기간</dt>
           <dd className="font-bold text-ink-900">{contract.period}</dd>
         </div>
       </dl>
       <Button className="mt-4 w-full" variant="outline">
-        Review
+        검토하기
       </Button>
     </Card>
   );

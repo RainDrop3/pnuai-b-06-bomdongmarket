@@ -19,19 +19,19 @@ export function DashboardPage() {
     <PageContainer>
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <p className="text-sm font-semibold text-slate-500">Hello, welcome back</p>
-          <h1 className="mt-1 text-3xl font-black text-ink-900">Green Space Lab</h1>
+          <p className="text-sm font-semibold text-slate-500">다시 만나서 반가워요</p>
+          <h1 className="mt-1 text-3xl font-black text-ink-900">그린스페이스랩</h1>
         </div>
         <div className="flex items-center gap-2">
           <button
-            aria-label="Notifications"
+            aria-label="알림"
             className="flex h-11 w-11 items-center justify-center rounded-app border border-leaf-100 bg-white text-leaf-700"
             type="button"
           >
             <Bell className="h-5 w-5" aria-hidden />
           </button>
           <Link
-            aria-label="My page"
+            aria-label="마이페이지"
             className="flex h-11 w-11 items-center justify-center rounded-app bg-leaf-700 text-white"
             to={ROUTES.myPage}
           >
@@ -42,18 +42,21 @@ export function DashboardPage() {
 
       {status === 'loading' || status === 'idle' ? (
         <div className="mt-6">
-          <LoadingState label="Loading dashboard" />
+          <LoadingState label="대시보드를 불러오는 중입니다" />
         </div>
       ) : null}
       {status === 'error' ? (
         <div className="mt-6">
-          <ErrorState message={error ?? 'Could not load dashboard'} onRetry={reload} />
+          <ErrorState
+            message={error ?? '대시보드를 불러오지 못했습니다'}
+            onRetry={reload}
+          />
         </div>
       ) : null}
 
       {status === 'success' ? (
         <>
-          <section className="mt-6 grid gap-4 md:grid-cols-3" aria-label="Summary cards">
+          <section className="mt-6 grid gap-4 md:grid-cols-3" aria-label="요약 카드">
             {metrics.map((metric) => (
               <MetricCard key={metric.label} metric={metric} />
             ))}
@@ -62,22 +65,22 @@ export function DashboardPage() {
           <section className="mt-8" aria-labelledby="dashboard-actions">
             <div className="flex items-center justify-between gap-4">
               <h2 id="dashboard-actions" className="text-2xl font-black text-ink-900">
-                Quick actions
+                빠른 실행
               </h2>
               <Link
                 className={buttonStyles({ variant: 'outline', size: 'sm' })}
                 to={ROUTES.newSpace}
               >
                 <Plus className="h-4 w-4" aria-hidden />
-                Register Space
+                공간 등록
               </Link>
             </div>
             <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                ['Register Space', ROUTES.newSpace],
-                ['Run Profit Simulation', ROUTES.prediction],
-                ['Find Matching', ROUTES.farmer],
-                ['Open Marketplace', ROUTES.market],
+                ['공간 등록', ROUTES.newSpace],
+                ['수익 시뮬레이션', ROUTES.prediction],
+                ['매칭 찾기', ROUTES.farmer],
+                ['마켓 열기', ROUTES.market],
               ].map(([label, href]) => (
                 <Link
                   key={label}
@@ -96,7 +99,7 @@ export function DashboardPage() {
                 id="received-matchings-title"
                 className="text-2xl font-black text-ink-900"
               >
-                Received matching requests
+                받은 매칭 신청
               </h2>
               <div className="mt-4 grid gap-4">
                 {matchings.map((request) => (
@@ -110,10 +113,10 @@ export function DashboardPage() {
                   id="contract-preview-title"
                   className="text-2xl font-black text-ink-900"
                 >
-                  Contracts
+                  계약
                 </h2>
                 <Link className="text-sm font-bold text-leaf-700" to={ROUTES.contracts}>
-                  View all
+                  전체 보기
                 </Link>
               </div>
               <div className="mt-4 grid gap-4">

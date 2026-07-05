@@ -8,27 +8,27 @@ import { DashboardPage } from '../DashboardPage';
 import { MyPage } from '../MyPage';
 
 describe('Dashboard pages', () => {
-  it('renders metrics, matching requests, and contract preview', async () => {
+  it('지표, 매칭 신청, 계약 미리보기를 렌더링한다', async () => {
     renderWithProviders(<DashboardPage />);
 
-    expect(await screen.findByText('Registered Spaces')).toBeInTheDocument();
-    expect(screen.getByText(/received matching requests/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/Urban Farmer Kim/i).length).toBeGreaterThan(0);
+    expect(await screen.findByText('등록 공간')).toBeInTheDocument();
+    expect(screen.getByText(/받은 매칭 신청/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/도심농부 김민준/i).length).toBeGreaterThan(0);
   });
 
-  it('renders contract cards and responds to status tab clicks', async () => {
+  it('계약 카드를 렌더링하고 상태 탭 클릭에 반응한다', async () => {
     const user = userEvent.setup();
     renderWithProviders(<ContractsPage />);
 
-    expect(await screen.findByText(/jangjeon retail space/i)).toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: 'Complete' }));
-    expect(screen.getByText(/seomyeon grow room/i)).toBeInTheDocument();
+    expect(await screen.findByText(/장전동 상가 공실/i)).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: '완료' }));
+    expect(screen.getByText(/서면 재배 공간/i)).toBeInTheDocument();
   });
 
-  it('renders my page profile menu', () => {
+  it('마이페이지 프로필 메뉴를 렌더링한다', () => {
     renderWithProviders(<MyPage />);
 
-    expect(screen.getByText('Green Space Lab')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /help center/i })).toBeInTheDocument();
+    expect(screen.getByText('그린스페이스랩')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /고객센터/i })).toBeInTheDocument();
   });
 });

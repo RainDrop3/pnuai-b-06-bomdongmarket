@@ -8,7 +8,7 @@ import type { MarketCategory } from '../types';
 // 마켓 검색어와 카테고리 필터를 서비스 호출과 연결합니다.
 export function useMarketItems() {
   const [keyword, setKeyword] = useState('');
-  const [category, setCategory] = useState<MarketCategory>('All');
+  const [category, setCategory] = useState<MarketCategory>('전체');
   const [items, setItems] = useState<MarketItem[]>([]);
   const [status, setStatus] = useState<AsyncStatus>('idle');
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +24,9 @@ export function useMarketItems() {
       setItems(result);
       setStatus('success');
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'Failed to load market');
+      setError(
+        caught instanceof Error ? caught.message : '마켓 상품을 불러오지 못했습니다',
+      );
       setStatus('error');
     }
   }, [params]);

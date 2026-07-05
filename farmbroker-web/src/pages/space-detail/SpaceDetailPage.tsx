@@ -31,15 +31,18 @@ export function SpaceDetailPage() {
         to={ROUTES.spaces}
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
-        Back to spaces
+        공간 목록으로 돌아가기
       </Link>
 
       {status === 'loading' || status === 'idle' ? (
-        <LoadingState label="Loading space detail" />
+        <LoadingState label="공간 상세 정보를 불러오는 중입니다" />
       ) : null}
 
       {status === 'error' ? (
-        <ErrorState message={error ?? 'Could not load this space'} onRetry={reload} />
+        <ErrorState
+          message={error ?? '공간 상세 정보를 불러오지 못했습니다'}
+          onRetry={reload}
+        />
       ) : null}
 
       {space ? (

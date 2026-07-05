@@ -9,19 +9,20 @@ import { useDashboard } from './hooks/useDashboard';
 // 와이어프레임의 계약 관리 화면을 카드와 단계 표시기로 구현합니다.
 export function ContractsPage() {
   const { contracts, status } = useDashboard();
-  const [activeStatus, setActiveStatus] = useState('Request');
+  const [activeStatus, setActiveStatus] = useState('신청');
+  // MVP에서는 신청 탭을 전체 신청 흐름의 진입점으로 보고 전체 계약을 보여줍니다.
   const filtered = contracts.filter((contract) =>
-    activeStatus === 'Request' ? true : contract.status === activeStatus,
+    activeStatus === '신청' ? true : contract.status === activeStatus,
   );
 
   return (
     <PageContainer>
       <div>
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-soil-500">
-          Contracts
+          계약 관리
         </p>
         <h1 className="mt-2 text-3xl font-black text-ink-900">
-          Manage contract progress
+          계약 진행 상태를 카드로 확인하세요
         </h1>
       </div>
 
@@ -59,7 +60,7 @@ export function ContractsPage() {
 
       <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {status === 'loading' || status === 'idle' ? (
-          <LoadingState label="Loading contracts" />
+          <LoadingState label="계약 목록을 불러오는 중입니다" />
         ) : (
           filtered.map((contract) => (
             <ContractCard contract={contract} key={contract.contractId} />

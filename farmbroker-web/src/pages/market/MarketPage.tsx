@@ -20,27 +20,27 @@ export function MarketPage() {
       <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-soil-500">
-            Local Market
+            로컬 마켓
           </p>
           <h1 className="mt-2 text-3xl font-black text-ink-900 sm:text-4xl">
-            Fresh produce from nearby smart farms
+            가까운 스마트팜에서 온 신선한 농산물
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
-            Browse crops with harvest dates, food mileage, producer history, and direct
-            purchase actions.
+            수확일, 푸드 마일리지, 생산 이력, 바로 담기 기능으로 로컬 농산물을
+            비교해보세요.
           </p>
         </div>
         <div className="rounded-app border border-leaf-100 bg-white p-3 text-sm font-semibold text-leaf-800 shadow-card">
           <MapPin className="mr-2 inline h-4 w-4 align-[-2px]" aria-hidden />
-          Within 8 km of Busan
+          부산 반경 8km 이내
         </div>
       </div>
 
       <div className="mt-6 grid gap-3 rounded-app border border-leaf-100 bg-white p-4 shadow-card lg:grid-cols-[1fr_auto]">
         <Input
-          aria-label="Search products"
+          aria-label="상품 검색"
           icon={<Search className="h-4 w-4" aria-hidden />}
-          placeholder="Search produce or farm"
+          placeholder="농산물 또는 농장 검색"
           value={keyword}
           onChange={(event) => setKeyword(event.target.value)}
         />
@@ -64,15 +64,18 @@ export function MarketPage() {
 
       <div className="mt-6">
         {status === 'loading' || status === 'idle' ? (
-          <LoadingState label="Loading local products" />
+          <LoadingState label="로컬 상품을 불러오는 중입니다" />
         ) : null}
         {status === 'error' ? (
-          <ErrorState message={error ?? 'Could not load market'} onRetry={reload} />
+          <ErrorState
+            message={error ?? '마켓 상품을 불러오지 못했습니다'}
+            onRetry={reload}
+          />
         ) : null}
         {status === 'success' && items.length === 0 ? (
           <EmptyState
-            title="No products found"
-            description="Try another category or search for a nearby farm."
+            title="검색된 상품이 없습니다"
+            description="다른 카테고리를 선택하거나 가까운 농장을 검색해보세요."
           />
         ) : null}
         {status === 'success' && items.length > 0 ? (

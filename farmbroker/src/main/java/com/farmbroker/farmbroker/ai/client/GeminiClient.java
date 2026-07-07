@@ -57,7 +57,12 @@ public class GeminiClient {
     public String generateJson(String prompt) {
         Map<String, Object> requestBody = Map.of(
                 "contents", List.of(Map.of("parts", List.of(Map.of("text", prompt)))),
-                "generationConfig", Map.of("responseMimeType", "application/json")
+                // thinkingBudget 0: 2.5 계열은 thinking(추론)이 기본 활성화라 응답이 read 타임아웃(15s)을
+                // 초과할 수 있어 비활성화한다. 2.0 등 thinking 미지원 모델로 바꿀 때는 이 필드를 제거해야 한다.
+                "generationConfig", Map.of(
+                        "responseMimeType", "application/json",
+                        "thinkingConfig", Map.of("thinkingBudget", 0)
+                )
         );
 
         String responseBody;

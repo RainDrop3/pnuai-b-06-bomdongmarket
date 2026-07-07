@@ -1,0 +1,120 @@
+### ─────────────────────────────────────────────────────
+### 백엔드 3 (매칭 / 작물 백과사전 / AI 추천) 수동 테스트 모음
+###
+### 사전 준비:
+###  1) test.http의 회원가입/로그인으로 OWNER 1명 + FARMER 1명 만들고 각 토큰 확보
+###  2) 공간 1개 필요 — 백엔드 2 공간 등록 API 머지 전에는 아래 SQL로 직접 삽입
+###     INSERT INTO spaces (owner_id, title, address, area, monthly_rent, floor,
+###       has_water, has_electricity, has_ventilation, description, status, deleted, created_at, updated_at)
+###     VALUES ({OWNER의 userId}, '부산대 앞 20평 공실', '부산 금정구 장전동 123-4', 66.00, 500000, 1,
+###       1, 1, 1, '채광이 좋은 1층 공실입니다.', 'AVAILABLE', 0, NOW(), NOW());
+### ─────────────────────────────────────────────────────
+
+### ── 작물 백과사전 (비로그인 공개) ──────────────────────
+
+### C1. 작물 목록 전체 (시드 12종)
+GET http://localhost:8080/api/crops
+
+### C2. 작물 목록 — 카테고리 필터 (잎채소/허브/과채류/새싹채소)
+GET http://localhost:8080/api/crops?category=허브
+
+### C3. 작물 목록 — 난이도 + 키워드 조합
+GET http://localhost:8080/api/crops?difficulty=EASY&keyword=상추
+
+### C4. 작물 상세
+GET http://localhost:8080/api/crops/1
+
+### C5. [에러 400] 잘못된 difficulty → VALIDATION_ERROR
+GET http://localhost:8080/api/crops?difficulty=INVALID
+
+### C6. [에러 404] 미존재 작물 → CROP_NOT_FOUND
+GET http://localhost:8080/api/crops/999
+
+### ── 매칭 ───────────────────────────────────────────────
+
+### M1. 매칭 신청 (FARMER 토큰) → 201, status=REQUESTED
+POST http://localhost:8080/api/matchings
+Content-Type: application/json
+Authorization: Bearer 여기에_FARMER_accessToken
+
+{
+  "spaceId": 1,
+  "message": "상추와 허브류를 재배하는 소규모 스마트팜을 운영하고 싶습니다."
+}
+
+### M2. [에러 403] OWNER 토큰으로 신청 → MATCHING_FORBIDDEN
+POST http://localhost:8080/api/matchings
+Content-Type: application/json
+Authorization: Bearer 여기에_OWNER_accessToken
+
+{
+  "spaceId": 1,
+  "message": "역할 검증 테스트"
+}
+
+### M3. [에러 409] 같은 FARMER가 재신청 → MATCHING_DUPLICATED
+POST http://localhost:8080/api/matchings
+Content-Type: application/json
+Authorization: Bearer 여기에_FARMER_accessToken
+
+{
+  "spaceId": 1,
+  "message": "중복 신청 테스트"
+}
+
+### M4. 내가 신청한 목록 (FARMER 토큰) — spaceTitle/월세/ownerNickname 포함
+GET http://localhost:8080/api/matchings/my-requests
+Authorization: Bearer 여기에_FARMER_accessToken
+
+### M5. 내가 받은 신청 목록 (OWNER 토큰) — farmerNickname/message 포함
+GET http://localhost:8080/api/matchings/received
+Authorization: Bearer 여기에_OWNER_accessToken
+
+### M6. 매칭 수락 (OWNER 토큰) → 매칭 ACCEPTED + 공간 MATCHED + 나머지 신청 자동 REJECTED
+PATCH http://localhost:8080/api/matchings/1/accept
+Authorization: Bearer 여기에_OWNER_accessToken
+
+### M7. 매칭 거절 (OWNER 토큰) — 공간 상태는 변경 없음
+PATCH http://localhost:8080/api/matchings/2/reject
+Authorization: Bearer 여기에_OWNER_accessToken
+
+### M8. [에러 409] 이미 처리된 매칭 재처리 → MATCHING_ALREADY_PROCESSED
+PATCH http://localhost:8080/api/matchings/1/accept
+Authorization: Bearer 여기에_OWNER_accessToken
+
+### M9. [에러 409] MATCHED 공간에 새 신청 → SPACE_NOT_AVAILABLE
+POST http://localhost:8080/api/matchings
+Content-Type: application/json
+Authorization: Bearer 여기에_FARMER_accessToken
+
+{
+  "spaceId": 1,
+  "message": "매칭 완료 공간 신청 테스트"
+}
+
+### ── AI 추천 (로그인 필요, 역할 무관) ────────────────────
+
+### A1. AI 작물/공간 활용 추천 — 첫 호출은 실제 Gemini 호출 (~5초)
+### 응답의 recommendedCrops[].cropId/expectedYieldKg/avgPricePerKg는 백과사전 매칭 시에만 값 존재
+POST http://localhost:8080/api/ai/recommend
+Content-Type: application/json
+Authorization: Bearer 여기에_아무_로그인_accessToken
+
+{
+  "spaceId": 1,
+  "preferredCrop": "상추",
+  "purpose": "소규모 부업",
+  "additionalInfo": "초기 비용을 최대한 줄이고 싶습니다."
+}
+
+### A2. [에러 404] 미존재 공간 → SPACE_NOT_FOUND
+POST http://localhost:8080/api/ai/recommend
+Content-Type: application/json
+Authorization: Bearer 여기에_아무_로그인_accessToken
+
+{
+  "spaceId": 999
+}
+
+### 참고: Gemini 장애(타임아웃/쿼터) 시 같은 공간의 최근 저장 결과가 있으면
+###       message "이전 추천 결과를 표시합니다."와 함께 그 결과가 반환된다 (fallback).

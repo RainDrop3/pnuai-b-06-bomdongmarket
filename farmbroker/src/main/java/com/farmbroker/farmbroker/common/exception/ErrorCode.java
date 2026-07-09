@@ -16,6 +16,13 @@ public enum ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "인증이 필요합니다."),
 
+    // ── space ────────────────────────────────────────────────────────────────
+    SPACE_NOT_FOUND(HttpStatus.NOT_FOUND, "공간을 찾을 수 없습니다."),
+    SPACE_NOT_AVAILABLE(HttpStatus.CONFLICT, "현재 매칭 가능한 상태의 공간이 아닙니다."),
+    NOT_SPACE_OWNER(HttpStatus.FORBIDDEN, "본인 소유 공간이 아닙니다."),
+    FORBIDDEN_ROLE(HttpStatus.FORBIDDEN, "권한이 없는 역할입니다."),
+    INVALID_STATUS_CHANGE(HttpStatus.BAD_REQUEST, "허용되지 않는 상태 변경입니다."),
+
     // ── 공통 ─────────────────────────────────────────────────────────────────
     VALIDATION_ERROR(HttpStatus.BAD_REQUEST, "요청 값이 올바르지 않습니다."),
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류가 발생했습니다.");
